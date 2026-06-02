@@ -1,0 +1,216 @@
+/* reset default browser biar ga berantakan */
+body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: transparent;
+    font-family: 'Orbitron', sans-serif;
+    color: #fcee0a;
+}
+
+#hud-wrapper {
+    position: absolute;
+    bottom: 30px;
+    right: 30px;
+}
+
+/* kotak utama HUD nya, dibikin kecil biar rapi */
+.hud-container {
+    position: relative;
+    width: 250px;
+    background: rgba(8, 8, 12, 0.88);
+    backdrop-filter: blur(12px);
+    border: 2px solid rgba(252, 238, 10, 0.6);
+    border-radius: 18px;
+    box-shadow: 0 0 18px rgba(252, 238, 10, 0.15), inset 0 0 12px rgba(0, 240, 255, 0.08);
+    display: flex;
+    flex-direction: column;
+    padding: 18px;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+/* efek scanline biar keliatan cyberpunk abis */
+.scanlines {
+    position: absolute;
+    top: 0; left: 0; bottom: 0; right: 0;
+    background: repeating-linear-gradient(0deg, transparent, transparent 1px, rgba(0,0,0,0.06) 1px, rgba(0,0,0,0.06) 2px);
+    z-index: 10;
+    pointer-events: none;
+}
+
+/* layar welcome pas baru naik kendaraan */
+.welcome-layer {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(8, 8, 12, 0.95);
+    display: none;
+    z-index: 20;
+    justify-content: center;
+    align-items: center;
+    border-radius: 18px;
+}
+.welcome-layer.active { display: flex; }
+.welcome-text {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 14px;
+    color: #00f0ff;
+    text-shadow: 0 0 8px #00f0ff;
+    text-align: center;
+    line-height: 2;
+    animation: flicker 0.15s infinite;
+}
+
+/* bagian kecepatan di paling atas */
+.speed-section {
+    text-align: center;
+    padding: 10px 0 6px;
+}
+.speed-value {
+    font-size: 52px;
+    font-weight: 700;
+    color: #fcee0a;
+    text-shadow: 0 0 16px rgba(252, 238, 10, 0.6);
+    line-height: 1;
+}
+.speed-unit {
+    font-size: 13px;
+    color: #00f0ff;
+    letter-spacing: 3px;
+    font-weight: 700;
+    margin-top: 2px;
+}
+
+/* tampilan RPM digital kayak odometer jadul */
+.rpm-digital {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(0, 240, 255, 0.25);
+    border-radius: 10px;
+    padding: 8px 12px;
+    margin-top: 8px;
+}
+.rpm-label {
+    font-size: 11px;
+    font-weight: 700;
+    color: rgba(0, 240, 255, 0.7);
+    letter-spacing: 1px;
+}
+.rpm-digits {
+    display: flex;
+    gap: 4px;
+    margin-left: auto;
+}
+.digit {
+    font-family: 'VT323', monospace;
+    font-size: 28px;
+    color: #fcee0a;
+    text-shadow: 0 0 6px rgba(252, 238, 10, 0.4);
+    background: rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(252, 238, 10, 0.2);
+    border-radius: 5px;
+    width: 22px;
+    text-align: center;
+    line-height: 32px;
+}
+
+/* baris ikon-ikon indikator */
+.icons-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 14px;
+    padding: 0 2px;
+}
+.icon {
+    width: 36px;
+    height: 36px;
+    background: rgba(0, 0, 0, 0.5);
+    border: 2px solid #2a2a2a;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.25s ease;
+}
+.icon svg { width: 20px; height: 20px; }
+
+/* kondisi indikator nyala sama mati */
+.indicator-on {
+    border-color: #00f0ff;
+    color: #00f0ff;
+    box-shadow: 0 0 12px rgba(0, 240, 255, 0.5);
+    background: rgba(0, 240, 255, 0.1);
+}
+.indicator-off { color: #444; }
+.sein-active {
+    border-color: #fcee0a;
+    color: #fcee0a;
+    box-shadow: 0 0 12px rgba(252, 238, 10, 0.5);
+    background: rgba(252, 238, 10, 0.1);
+    animation: blink 0.5s step-end infinite;
+}
+
+/* baris data di bawah: gear, bensin, health */
+.bottom-row {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 14px;
+    gap: 8px;
+}
+.data-box {
+    flex: 1;
+    background: rgba(255, 255, 255, 0.04);
+    padding: 8px 6px;
+    border-radius: 10px;
+    border-top: 2px solid rgba(252, 238, 10, 0.5);
+}
+.label-xsmall {
+    font-size: 8px;
+    margin-bottom: 4px;
+    letter-spacing: 1px;
+    color: rgba(252, 238, 10, 0.6);
+}
+.value-text { font-size: 18px; font-weight: 700; }
+.bar-mini-bg {
+    width: 100%;
+    height: 8px;
+    background: #111;
+    margin-top: 4px;
+    border-radius: 4px;
+    overflow: hidden;
+}
+.mini-fill {
+    transition: width 0.3s ease;
+    height: 100%;
+    border-radius: 4px;
+}
+.fuel-bg { background: linear-gradient(90deg, #00f0ff, #0088cc); }
+.health-bg { background: linear-gradient(90deg, #ff0055, #cc3300); }
+
+.ending-layer.active { display: flex; }
+.ending-text {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 14px;
+    color: #00f0ff;
+    text-shadow: 0 0 8px #00f0ff;
+    text-align: center;
+    line-height: 2;
+    animation: flicker 0.15s infinite;
+}
+
+
+/* animasi kedip-kedip buat sein sama welcome */
+@keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.15; } }
+@keyframes flicker { 0%, 100% { opacity: 1; } 50% { opacity: 0.7; } }
+
+/* kredit pembuat, kecil aja biar ga ganggu */
+.credit-section {
+    font-size: 8px;
+    margin-top: 12px;
+    opacity: 0.25;
+    text-align: center;
+    letter-spacing: 0.5px;
+}
