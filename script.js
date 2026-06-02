@@ -33,7 +33,10 @@ function setSpeed(speed) {
  * @param {number} rpm - The RPM value to display. (0 to 1).
  */
 function setRPM(rpm) {
-    elements.rpm.innerText = `${rpm.toFixed(4)} RPM`;
+    const rpmValue = Math.round(rpm * 10000);
+    elements.rpm.innerText = `${rpmValue} RPM`;
+    const rpmPercent = Math.min(100, (rpm * 100));
+    document.getElementById('rpmFill').style.width = `${rpmPercent}%`;
 }
 
 /**
