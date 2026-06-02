@@ -3,74 +3,181 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JGVRP Futuristic HUD</title>
-    <link rel="stylesheet" href="style.css">
-    <!-- font keren buat tampilannya -->
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
+    <title>Neon Speedometer - JGVRP</title>
+    <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
-
-    <div id="hud-wrapper">
-        <div class="hud-container">
-            <!-- efek garis-garis biar keliatan kaya monitor jadul -->
-            <div class="scanlines"></div>
-
-            <!-- layar sambutan pas pertama masuk kendaraan -->
-            <div id="welcome-screen" class="welcome-layer active">
-                <div class="welcome-text">SYSTEM<br>REBOOT...</div>
-            </div>
-
-            <!-- bagian kecepatan, ditaruh paling atas -->
-            <div class="speed-section">
-                <div id="speed" class="speed-value">0</div>
-                <div class="speed-unit">MPH</div>
-            </div>
-
-            <!-- tampilan RPM digital 4 digit -->
-            <div class="rpm-digital">
-                <div class="rpm-label">RPM</div>
-                <div class="rpm-digits">
-                    <span id="rpm-d1" class="digit">0</span>
-                    <span id="rpm-d2" class="digit">0</span>
-                    <span id="rpm-d3" class="digit">0</span>
-                    <span id="rpm-d4" class="digit">0</span>
-                </div>
-            </div>
-
-            <!-- baris ikon-ikon indikator -->
-            <div class="icons-row">
-                <div id="sein-l" class="icon indicator-off"><svg viewBox="0 0 24 24"><path d="M8 4L2 12L8 20V17H14V7H8V4Z" fill="currentColor" stroke="currentColor" stroke-width="1" stroke-linejoin="round"/></svg></div>
-                <div id="engine-icon" class="icon indicator-off"><svg viewBox="0 0 24 24"><path d="M12 2C10 4 10 6 11 8C8 8 5 9 5 12C5 16 8 18 12 18C16 18 19 16 19 12C19 9 16 8 13 8C14 6 14 4 12 2M12 10C10.9 10 10 10.9 10 12C10 13.1 10.9 14 12 14C13.1 14 14 13.1 14 12C14 10.9 13.1 10 12 10Z" fill="currentColor"/></svg></div>
-                <div id="lights-icon" class="icon indicator-off"><svg viewBox="0 0 24 24"><g fill="currentColor"><rect x="9" y="3" width="6" height="5" rx="1"/><rect x="8" y="8" width="8" height="2" rx="1"/><path d="M7 11L5 16H19L17 11Z"/><rect x="10" y="16" width="4" height="2" rx="1"/><path d="M8 8L6 6M16 8L18 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></g></svg></div>
-                <div id="seatbelt-icon" class="icon indicator-off"><svg viewBox="0 0 24 24"><g fill="currentColor"><path d="M4 4C3 4 2 5 2 6V12C2 13 3 14 4 14H7V16H6C5 16 4 17 4 18V20C4 21 5 22 6 22H8C9 22 10 21 10 20V18C10 17 9 16 8 16H8V14H16V16H15C14 16 13 17 13 18V20C13 21 14 22 15 22H17C18 22 19 21 19 20V18C19 17 18 16 17 16H16V14H19C20 14 21 13 21 12V6C21 5 20 4 19 4H4Z" stroke="currentColor" stroke-width="1" fill="none"/><rect x="5" y="5" width="14" height="8" fill="currentColor" opacity="0.4"/></g></svg></div>
-                <div id="sein-r" class="icon indicator-off"><svg viewBox="0 0 24 24"><path d="M16 4L22 12L16 20V17H10V7H16V4Z" fill="currentColor" stroke="currentColor" stroke-width="1" stroke-linejoin="round"/></svg></div>
-            </div>
-
-            <!-- baris bawah buat gear, bensin, sama health -->
-            <div class="bottom-row">
-                <div class="data-box">
-                    <div class="label-xsmall">GEAR</div>
-                    <div id="gear" class="value-text">N</div>
-                </div>
-                <div class="data-box">
-                    <div class="label-xsmall">FUEL</div>
-                    <div class="bar-mini-bg"><div id="fuel-bar" class="bar-fill mini-fill fuel-bg"></div></div>
-                </div>
-                <div class="data-box">
-                    <div class="label-xsmall">HEALTH</div>
-                    <div class="bar-mini-bg"><div id="health-bar" class="bar-fill mini-fill health-bg"></div></div>
-                </div>
-            </div>
-
-            <div id="ending-screen" class="ending-layer active">
-                <div class="ending-text">ENGINE<br>OFF...</div>
-            </div>
-
-            <!-- kredit pembuat -->
-            <div class="credit-section">credit by: bimaak15/B1maF4st</div>
+    <!-- Welcome Screen -->
+    <div class="welcome-screen" id="welcomeScreen">
+        <div class="welcome-content">
+            <h1 class="welcome-title">VEHICLE INITIALIZED</h1>
+            <div class="welcome-lines"></div>
         </div>
     </div>
 
-    <script src="script.js"></script>
+    <!-- Main Speedometer Display -->
+    <main class="speedometer" id="mainDisplay">
+        <!-- Top Indicators Section -->
+        <div class="indicators-section">
+            <div class="indicator-group">
+                <div class="indicator-item seatbelt-indicator" title="Seatbelt" id="seatbeltLight">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 2L8 6H4C3 6 3 10 3 10V20H21V10C21 10 21 6 20 6H16L12 2Z"/>
+                        <line x1="6" y1="10" x2="6" y2="18"/>
+                        <line x1="18" y1="10" x2="18" y2="18"/>
+                    </svg>
+                </div>
+                <div class="indicator-item headlight-indicator" title="Headlights" id="headlightLight">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <circle cx="12" cy="12" r="8"/>
+                        <path d="M5 12C5 8.13 8.13 5 12 5C15.87 5 19 8.13 19 12C19 15.87 15.87 19 12 19C8.13 19 5 15.87 5 12Z"/>
+                    </svg>
+                </div>
+                <div class="indicator-item sein-left-indicator" title="Left Turn" id="seinLeftLight">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <polygon points="8,16 4,12 8,8 9.4,9.4 6.8,12 9.4,14.6"/>
+                    </svg>
+                </div>
+                <div class="indicator-item sein-right-indicator" title="Right Turn" id="seinRightLight">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <polygon points="16,8 20,12 16,16 14.6,14.6 17.2,12 14.6,9.4"/>
+                    </svg>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Display Section -->
+        <div class="display-container">
+            <!-- Speed and RPM -->
+            <div class="speed-section">
+                <div class="speed-display">
+                    <div class="speed-value" id="speed">&nbsp;</div>
+                    <div class="speed-label">SPEED</div>
+                </div>
+                <div class="rpm-section">
+                    <div class="rpm-label">RPM</div>
+                    <div class="rpm-bar">
+                        <div class="rpm-fill" id="rpmFill"></div>
+                    </div>
+                    <div class="rpm-value" id="rpm">&nbsp;</div>
+                </div>
+            </div>
+
+            <!-- Vehicle Stats Grid -->
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <span class="stat-label">ENGINE</span>
+                    <span class="stat-value" id="engine">&nbsp;</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">GEAR</span>
+                    <span class="stat-value" id="gear">&nbsp;</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">FUEL</span>
+                    <span class="stat-value" id="fuel">&nbsp;</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">HEALTH</span>
+                    <span class="stat-value" id="health">&nbsp;</span>
+                </div>
+            </div>
+
+            <!-- Hidden data fields for JS functions -->
+            <div style="display: none;">
+                <dd id="headlights">&nbsp;</dd>
+                <dd id="indicators">&nbsp;</dd>
+                <dd id="seatbelts">&nbsp;</dd>
+                <dd id="odometer">&nbsp;</dd>
+            </div>
+        </div>
+
+        <!-- Credit Section -->
+        <div class="credit-text">
+            credit by: bimaak15/B1maF4st
+        </div>
+    </main>
+
+    <script src="/script.js"></script>
+    <script>
+        // Handle welcome screen visibility (non-destructive initialization)
+        window.addEventListener('DOMContentLoaded', function() {
+            const welcomeScreen = document.getElementById('welcomeScreen');
+            const mainDisplay = document.getElementById('mainDisplay');
+            
+            if (welcomeScreen && mainDisplay) {
+                // Hide welcome screen after 3 seconds
+                setTimeout(function() {
+                    welcomeScreen.classList.add('hidden');
+                }, 3000);
+            }
+
+            // Enhanced indicator lighting system
+            const seatbeltLight = document.getElementById('seatbeltLight');
+            const headlightLight = document.getElementById('headlightLight');
+            const seinLeftLight = document.getElementById('seinLeftLight');
+            const seinRightLight = document.getElementById('seinRightLight');
+            const rpmFill = document.getElementById('rpmFill');
+
+            // Intercept setSeatbelts to update indicator light
+            const originalSetSeatbelts = window.setSeatbelts;
+            if (originalSetSeatbelts) {
+                window.setSeatbelts = function(state) {
+                    originalSetSeatbelts(state);
+                    if (seatbeltLight) {
+                        seatbeltLight.classList.toggle('active', state);
+                        seatbeltLight.classList.toggle('inactive', !state);
+                    }
+                };
+            }
+
+            // Intercept setHeadlights to update indicator light
+            const originalSetHeadlights = window.setHeadlights;
+            if (originalSetHeadlights) {
+                window.setHeadlights = function(state) {
+                    originalSetHeadlights(state);
+                    if (headlightLight) {
+                        headlightLight.classList.toggle('active', state > 0);
+                        headlightLight.classList.toggle('inactive', state === 0);
+                    }
+                };
+            }
+
+            // Intercept setLeftIndicator to update sein light
+            const originalSetLeftIndicator = window.setLeftIndicator;
+            if (originalSetLeftIndicator) {
+                window.setLeftIndicator = function(state) {
+                    originalSetLeftIndicator(state);
+                    if (seinLeftLight) {
+                        seinLeftLight.classList.toggle('active', state);
+                        seinLeftLight.classList.toggle('inactive', !state);
+                    }
+                };
+            }
+
+            // Intercept setRightIndicator to update sein light
+            const originalSetRightIndicator = window.setRightIndicator;
+            if (originalSetRightIndicator) {
+                window.setRightIndicator = function(state) {
+                    originalSetRightIndicator(state);
+                    if (seinRightLight) {
+                        seinRightLight.classList.toggle('active', state);
+                        seinRightLight.classList.toggle('inactive', !state);
+                    }
+                };
+            }
+
+            // Intercept setRPM to update RPM bar fill
+            const originalSetRPM = window.setRPM;
+            if (originalSetRPM) {
+                window.setRPM = function(rpm) {
+                    originalSetRPM(rpm);
+                    if (rpmFill) {
+                        rpmFill.style.width = (rpm * 100) + '%';
+                    }
+                };
+            }
+        });
+    </script>
 </body>
 </html>
