@@ -20,12 +20,24 @@ function setEngine(state) {
  * @description Converts the speed value to the current speed mode and updates the display.
  */
 function setSpeed(speed) {
+    let unit = 'MPH';
+    let value = 0;
     switch(speedMode)
     {
-        case 1: speed = elements.speed.innerText = `${Math.round(speed * 2.236936)} MPH`; break; // MPH
-        case 2: speed = elements.speed.innerText = `${Math.round(speed * 1.943844)} Knots`; break; // Knots
-        default: speed = elements.speed.innerText = `${Math.round(speed * 3.6)} KMH`; // KMH
+        case 1: 
+            value = Math.round(speed * 2.236936);
+            unit = 'MPH';
+            break;
+        case 2: 
+            value = Math.round(speed * 1.943844);
+            unit = 'Knots';
+            break;
+        default: 
+            value = Math.round(speed * 3.6);
+            unit = 'KMH';
     }
+    elements.speed.innerText = value;
+    if (elements.unit) elements.unit.innerText = unit;
 }
 
 /**
@@ -132,5 +144,6 @@ document.addEventListener('DOMContentLoaded', () => {
         indicators: document.getElementById('indicators'),
         seatbelts: document.getElementById('seatbelts'),
         odometer: document.getElementById('odometer'),
+        unit: document.getElementById('unit'),
     };
 });

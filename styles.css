@@ -316,18 +316,28 @@ main.speedometer.hidden {
     border: 2px solid #FF00FF;
     border-radius: 10px;
     box-shadow: 0 0 20px rgba(255, 0, 255, 0.3), inset 0 0 15px rgba(255, 0, 255, 0.1);
-    min-width: 140px;
-    max-width: 140px;
+    min-width: 180px;
+    max-width: 180px;
     overflow: hidden;
 }
 
 .speed-value {
-    font-size: 28px;
+    font-size: 36px;
     font-weight: bold;
     color: #FF00FF;
     text-shadow: 0 0 10px #FF00FF, 0 0 20px #FF00FF;
     margin: 0;
     letter-spacing: 1px;
+    line-height: 1;
+}
+
+.speed-unit {
+    font-size: 20px;
+    font-weight: bold;
+    color: #FF00FF;
+    text-shadow: 0 0 8px #FF00FF;
+    margin-top: 5px;
+    text-transform: uppercase;
 }
 
 .speed-label {
@@ -335,7 +345,9 @@ main.speedometer.hidden {
     color: rgba(255, 0, 255, 0.7);
     text-transform: uppercase;
     letter-spacing: 1px;
-    margin-top: 5px;
+    margin-top: 8px;
+    border-top: 1px solid rgba(255, 0, 255, 0.2);
+    padding-top: 5px;
 }
 
 /* RPM SECTION */
