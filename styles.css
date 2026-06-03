@@ -141,8 +141,7 @@ main.speedometer {
     bottom: 15px;
     right: 15px;
     width: 420px;
-    background: rgba(10, 30, 50, 0.25);
-    backdrop-filter: blur(10px);
+    background: rgba(10, 30, 50, 0.15);
     border: 2px solid #00FFFF;
     border-radius: 15px;
     padding: 20px;
