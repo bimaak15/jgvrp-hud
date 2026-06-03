@@ -322,15 +322,12 @@ main.speedometer.hidden {
 }
 
 .speed-value {
-    font-size: 36px;
+    font-size: 28px;
     font-weight: bold;
     color: #FF00FF;
     text-shadow: 0 0 10px #FF00FF, 0 0 20px #FF00FF;
     margin: 0;
-    letter-spacing: 2px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+    letter-spacing: 1px;
 }
 
 .speed-label {
