@@ -141,7 +141,11 @@ main.speedometer {
     bottom: 15px;
     right: 15px;
     width: 420px;
-    background: rgba(10, 30, 50, 0.15);
+    background: 
+        linear-gradient(rgba(0, 0, 0, 0.15) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 0, 0, 0.15) 1px, transparent 1px),
+        rgba(10, 30, 50, 0.5);
+    background-size: 25px 25px, 25px 25px, 100% 100%;
     border: 2px solid #00FFFF;
     border-radius: 15px;
     padding: 20px;
